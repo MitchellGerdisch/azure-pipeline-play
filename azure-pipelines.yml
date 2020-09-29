@@ -17,7 +17,8 @@ jobs:
         inputs:
           azureSubscription: '$(ServiceConnectName)'
           #command: 'preview'
-          command: 'up'
+          #command: 'up'
+          command: 'destroy'
           args: '--yes --skip-preview'
           cwd: './'
           # Replace this with your org's name.
