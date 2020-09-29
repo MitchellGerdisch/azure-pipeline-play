@@ -16,7 +16,8 @@ jobs:
       - task: Pulumi@1
         inputs:
           azureSubscription: '$(ServiceConnectName)'
-          command: 'preview'
+          command: 'preview -v5 --debug'
+          #command: 'preview'
           #command: 'up'
           #args: '--yes --skip-preview'
           cwd: './'
