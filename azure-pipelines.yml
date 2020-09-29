@@ -3,20 +3,21 @@
 # so we can skip the `stages` directive.
 
 jobs:
-- job: infrastructure
-  pool:
-    vmImage: 'ubuntu-16.04'
-  steps:
-  - task: Npm@1
-    inputs:
-      command: install
-      workingDir: "./"
+  - job: infrastructure
+    pool:
+      vmImage: 'ubuntu-16.04'
+    steps:
+      - task: Npm@1
+        inputs:
+          command: install
+          workingDir: './'
 
- - task: Pulumi@1 
-    inputs:
-      azureSubscription: '$(ServiceConnectName)'
-      command: 'up'
-      args: '--yes --skip-preview'
-      cwd: './'
-      # Replace this with your org's name.
-      stack: '$(StackName)'
+      - task: Pulumi@1
+        inputs:
+          azureSubscription: '$(ServiceConnectName)'
+          command: 'preview'
+          #command: 'up'
+          #args: '--yes --skip-preview'
+          cwd: './'
+          # Replace this with your org's name.
+          stack: '$(StackName)'
