@@ -12,12 +12,11 @@ jobs:
       command: install
       workingDir: "./"
 
-  - task: Pulumi@1
+ - task: Pulumi@0
     inputs:
-      # Replace this with your service connection name.
       azureSubscription: '$(ServiceConnectName)'
-      command: "preview"
+      command: "up"
+      args: "--yes --skip-preview"
       cwd: "./"
-      # Replace this with your stack name, or define a build variable called `StackName`
-      # whose value is your stack name.
+      # Replace this with your org's name.
       stack: "$(StackName)"
