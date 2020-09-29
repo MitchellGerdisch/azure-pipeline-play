@@ -16,9 +16,9 @@ jobs:
       - task: Pulumi@1
         inputs:
           azureSubscription: '$(ServiceConnectName)'
-          command: 'preview'
-          #command: 'up'
-          #args: '--yes --skip-preview'
+          #command: 'preview'
+          command: 'up'
+          args: '--yes --skip-preview'
           cwd: './'
           # Replace this with your org's name.
           stack: '$(StackName)'
