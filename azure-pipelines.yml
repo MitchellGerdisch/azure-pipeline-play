@@ -1,6 +1,7 @@
 # A minimal Azure Pipelines build configuration file.
 # This configuration has just a single stage,
 # so we can skip the `stages` directive.
+#
 
 jobs:
   - job: infrastructure
