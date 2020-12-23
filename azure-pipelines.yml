@@ -22,22 +22,21 @@ stages:
               stack: '$(Build.SourceBranchName)'
               createStack: true
 
-
   - stage: destroy infrastructure
-      jobs:
-        - job: destroy infrastructure
-          pool:
-            vmImage: 'ubuntu-16.04'
-          steps:
-            - task: Npm@1
-              inputs:
-                command: install
-                workingDir: './'
+    jobs:
+      - job: destroy infrastructure
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+          - task: Npm@1
+            inputs:
+              command: install
+              workingDir: './'
 
-            - task: Pulumi@1
-              inputs:
-                azureSubscription: '$(ServiceConnectName)'
-                command: 'destroy'
-                args: '--yes --skip-preview'
-                cwd: './'
-                stack: '$(Build.SourceBranchName)'
+          - task: Pulumi@1
+            inputs:
+              azureSubscription: '$(ServiceConnectName)'
+              command: 'destroy'
+              args: '--yes --skip-preview'
+              cwd: './'
+              stack: '$(Build.SourceBranchName)'
