@@ -1,26 +1,43 @@
-# A minimal Azure Pipelines build configuration file.
-# This configuration has just a single stage,
-# so we can skip the `stages` directive.
+# An azure pipeline that builds a pulumi stack based on the branch name.
 #
 
-jobs:
-  - job: infrastructure
-    pool:
-      vmImage: 'ubuntu-16.04'
-    steps:
-      - task: Npm@1
-        inputs:
-          command: install
-          workingDir: './'
+stages:
+  - stage: build infrastructure
+    jobs:
+      - job: build infrastructure
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+          - task: Npm@1
+            inputs:
+              command: install
+              workingDir: './'
 
-      - task: Pulumi@1
-        inputs:
-          azureSubscription: '$(ServiceConnectName)'
-          #command: 'preview'
-          command: 'up'
-          #command: 'destroy'
-          args: '--yes --skip-preview'
-          cwd: './'
-          # Replace this with your org's name.
-          stack: '$(Build.SourceBranchName)'
-          createStack: true
+          - task: Pulumi@1
+            inputs:
+              azureSubscription: '$(ServiceConnectName)'
+              command: 'up'
+              args: '--yes --skip-preview'
+              cwd: './'
+              stack: '$(Build.SourceBranchName)'
+              createStack: true
+
+
+  - stage: destroy infrastructure
+      jobs:
+        - job: destroy infrastructure
+          pool:
+            vmImage: 'ubuntu-16.04'
+          steps:
+            - task: Npm@1
+              inputs:
+                command: install
+                workingDir: './'
+
+            - task: Pulumi@1
+              inputs:
+                azureSubscription: '$(ServiceConnectName)'
+                command: 'destroy'
+                args: '--yes --skip-preview'
+                cwd: './'
+                stack: '$(Build.SourceBranchName)'
