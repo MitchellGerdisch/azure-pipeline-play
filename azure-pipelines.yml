@@ -4,7 +4,7 @@
 stages:
   - stage: build_infrastructure
     jobs:
-      - job: build infrastructure
+      - job: build_infrastructure
         pool:
           vmImage: 'ubuntu-16.04'
         steps:
@@ -24,7 +24,7 @@ stages:
 
   - stage: destroy_infrastructure
     jobs:
-      - job: destroy infrastructure
+      - job: destroy_infrastructure
         pool:
           vmImage: 'ubuntu-16.04'
         steps:
