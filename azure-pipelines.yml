@@ -22,4 +22,5 @@ jobs:
           args: '--yes --skip-preview'
           cwd: './'
           # Replace this with your org's name.
-          stack: '$(StackName)'
+          stack: '$(Build.SourceBranchName)'
+          createStack: true
