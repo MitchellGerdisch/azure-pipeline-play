@@ -2,7 +2,7 @@
 #
 
 stages:
-  - stage: build infrastructure
+  - stage: build_infrastructure
     jobs:
       - job: build infrastructure
         pool:
@@ -22,7 +22,7 @@ stages:
               stack: '$(Build.SourceBranchName)'
               createStack: true
 
-  - stage: destroy infrastructure
+  - stage: destroy_infrastructure
     jobs:
       - job: destroy infrastructure
         pool:
