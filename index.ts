@@ -2,7 +2,7 @@ import * as pulumi from '@pulumi/pulumi';
 import * as azure from '@pulumi/azure';
 
 // Create an Azure Resource Group
-const resourceGroup = new azure.core.ResourceGroup('mitch-rg', {
+export const resourceGroup = new azure.core.ResourceGroup('mitch-rg', {
   location: "centralus"
 });
 
@@ -15,4 +15,4 @@ const resourceGroup = new azure.core.ResourceGroup('mitch-rg', {
 // });
 
 // Export the connection string for the storage account
-export const connectionString = account.primaryConnectionString;
+//export const connectionString = account.primaryConnectionString;
