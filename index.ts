@@ -3,7 +3,7 @@ import * as azure from '@pulumi/azure';
 
 const location = process.env["RG_LOCATION"] || "centralus"
 // Create an Azure Resource Group
-export const resourceGroup = new azure.core.ResourceGroup(rgName, {
+export const resourceGroup = new azure.core.ResourceGroup("mitch-devops-rg", {
   location: location
 }, {additionalSecretOutputs: ["location"]});
 
