@@ -1,11 +1,11 @@
 import * as pulumi from '@pulumi/pulumi';
 import * as azure from '@pulumi/azure';
 
-const rgName = process.env["RG_NAME"] || "mitch-default"
+const location = process.env["LOCATION"] || "centralus"
 // Create an Azure Resource Group
 export const resourceGroup = new azure.core.ResourceGroup(rgName, {
-  location: "centralus"
-}, {additionalSecretOutputs: ["name"]});
+  location: location
+}, {additionalSecretOutputs: ["location"]});
 
 // Create an Azure resource (Storage Account)
 // const account = new azure.storage.Account('storage', {
