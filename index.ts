@@ -1,8 +1,9 @@
 import * as pulumi from '@pulumi/pulumi';
 import * as azure from '@pulumi/azure';
 
+export const rgName = process.env["RG_NAME"]
 // Create an Azure Resource Group
-export const resourceGroup = new azure.core.ResourceGroup('mitch-rg', {
+export const resourceGroup = new azure.core.ResourceGroup(rgName, {
   location: "centralus"
 });
 
