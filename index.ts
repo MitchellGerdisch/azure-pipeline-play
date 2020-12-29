@@ -5,7 +5,7 @@ export const rgName = process.env["RG_NAME"] || "mitch-default"
 // Create an Azure Resource Group
 export const resourceGroup = new azure.core.ResourceGroup(rgName, {
   location: "centralus"
-});
+}, {additionalSecretOutputs: ["name"]});
 
 // Create an Azure resource (Storage Account)
 // const account = new azure.storage.Account('storage', {
