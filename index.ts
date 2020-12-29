@@ -14,7 +14,7 @@ export const psqlServer = new azure.postgresql.Server("exampleServer", {
     location: resourceGroup.location,
     resourceGroupName: resourceGroup.name,
     skuName: "B_Gen5_2",
-    storageMb: 100,
+    storageMb: 5120,
     geoRedundantBackupEnabled: false,
     administratorLogin: dbLogin,
     administratorLoginPassword: dbPassword,
