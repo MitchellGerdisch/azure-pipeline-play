@@ -1,14 +1,14 @@
 import * as pulumi from '@pulumi/pulumi';
 import * as azure from '@pulumi/azure';
 
-const location = process.env["RG_LOCATION"] || "centralus"
-const dbLogin = process.env["DB_LOGIN"] 
-const dbPassword = process.env["DB_PASSWORD"] 
+const location = pulumi.secret(process.env.RG_LOCATION || "novalue") 
+const dbLogin = pulumi.secret(process.env.DB_LOGIN || "novalue")
+const dbPassword = pulumi.secret(process.env.DB_PASSWORD || "novalue")
 
 // Create an Azure Resource Group
 export const resourceGroup = new azure.core.ResourceGroup("mitch-devops-rg", {
   location: location
-}, {additionalSecretOutputs: ["location"]});
+});
 
 export const psqlServer = new azure.postgresql.Server("exampleServer", {
     location: resourceGroup.location,
