@@ -27,21 +27,21 @@ stages:
             inputs:
               script: echo "Hello post Pulumi task " `date`
 
-  # - stage: destroy_infrastructure
-  #   jobs:
-  #     - job: destroy_infrastructure
-  #       pool:
-  #         vmImage: 'ubuntu-16.04'
-  #       steps:
-  #         - task: Npm@1
-  #           inputs:
-  #             command: install
-  #             workingDir: './'
+  - stage: destroy_infrastructure
+    jobs:
+      - job: destroy_infrastructure
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+          - task: Npm@1
+            inputs:
+              command: install
+              workingDir: './'
 
-  #         - task: Pulumi@1
-  #           inputs:
-  #             azureSubscription: '$(ServiceConnectName)'
-  #             command: 'destroy'
-  #             args: '--yes --skip-preview'
-  #             cwd: './'
-  #             stack: '$(Build.SourceBranchName)'
+          - task: Pulumi@1
+            inputs:
+              azureSubscription: '$(ServiceConnectName)'
+              command: 'destroy'
+              args: '--yes --skip-preview'
+              cwd: './'
+              stack: '$(Build.SourceBranchName)'
