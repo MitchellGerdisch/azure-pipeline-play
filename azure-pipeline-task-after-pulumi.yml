@@ -14,7 +14,7 @@ stages:
               workingDir: './'
           - task: CmdLine@2
             inputs:
-              script: echo "Hello pre Pulumi task"
+              script: echo "Hello pre Pulumi task " `date`
           - task: Pulumi@1
             inputs:
               azureSubscription: '$(ServiceConnectName)'
@@ -25,7 +25,7 @@ stages:
               createStack: true
           - task: CmdLine@2
             inputs:
-              script: echo "Hello post Pulumi task"
+              script: echo "Hello post Pulumi task " `date`
 
   - stage: destroy_infrastructure
     jobs:
