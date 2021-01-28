@@ -1,0 +1,42 @@
+# An azure pipeline that builds a pulumi stack based on the branch name.
+#
+
+stages:
+  - stage: build_infrastructure
+    jobs:
+      - job: build_infrastructure
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+          - task: Npm@1
+            inputs:
+              command: install
+              workingDir: './'
+
+          - task: Pulumi@1
+            inputs:
+              azureSubscription: '$(ServiceConnectName)'
+              command: 'up'
+              args: '--yes --skip-preview'
+              cwd: './'
+              stack: '$(Build.SourceBranchName)'
+              createStack: true
+
+  - stage: destroy_infrastructure
+    jobs:
+      - job: destroy_infrastructure
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+          - task: Npm@1
+            inputs:
+              command: install
+              workingDir: './'
+
+          - task: Pulumi@1
+            inputs:
+              azureSubscription: '$(ServiceConnectName)'
+              command: 'destroy'
+              args: '--yes --skip-preview'
+              cwd: './'
+              stack: '$(Build.SourceBranchName)'
