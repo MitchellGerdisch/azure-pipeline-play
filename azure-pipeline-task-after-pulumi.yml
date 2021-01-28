@@ -12,7 +12,9 @@ stages:
             inputs:
               command: install
               workingDir: './'
-
+          - task: CmdLine@2
+            inputs:
+              script: echo "Hello pre Pulumi task"
           - task: Pulumi@1
             inputs:
               azureSubscription: '$(ServiceConnectName)'
@@ -21,6 +23,9 @@ stages:
               cwd: './'
               stack: '$(Build.SourceBranchName)'
               createStack: true
+          - task: CmdLine@2
+            inputs:
+              script: echo "Hello post Pulumi task"
 
   - stage: destroy_infrastructure
     jobs:
