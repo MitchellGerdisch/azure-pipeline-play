@@ -5,6 +5,8 @@ const location = pulumi.secret(process.env.RG_LOCATION || "novalue")
 const dbLogin = pulumi.secret(process.env.DB_LOGIN || "novalue")
 const dbPassword = pulumi.secret(process.env.DB_PASSWORD || "novalue")
 
+export const outputPassword = dbPassword
+
 // Create an Azure Resource Group
 export const resourceGroup = new azure.core.ResourceGroup("mitch-devops-rg", {
   location: location
