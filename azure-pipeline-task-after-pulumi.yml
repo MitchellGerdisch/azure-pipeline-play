@@ -32,7 +32,7 @@ stages:
     jobs:
       - job: destroy_infrastructure
         pool:
-          vmImage: 'ubuntu-16.04'
+          vmImage: 'ubuntu-latest'
         steps:
           - task: Npm@1
             inputs:
