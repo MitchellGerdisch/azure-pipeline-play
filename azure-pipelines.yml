@@ -13,14 +13,33 @@ stages:
               command: install
               workingDir: './'
 
-          - task: Pulumi@1
+          - task: AzureKeyVault@1
             inputs:
-              azureSubscription: '$(ServiceConnectName)'
-              command: 'up'
-              args: '--yes --skip-preview'
-              cwd: './'
-              stack: '$(Build.SourceBranchName)'
-              createStack: true
+              azureSubscription: "Pulumi Subscription"
+              KeyVaultName: "mitch-deleteme"
+              SecretsFilter: "mitch-deleteme"
+              RunAsPreJob: false
+
+          - task: CmdLine@2
+            inputs:
+              script: echo Secret found $(mitch-deleteme)
+
+          - task: CmdLine@2
+            inputs:
+              script: pulumi config set-all --plaintext dbkey=$(mitch-deleteme)
+          
+          - task: CmdLine@2
+            inputs:
+              script: cat ./pulumi.dev.yaml
+
+          # - task: Pulumi@1
+          #   inputs:
+          #     azureSubscription: '$(ServiceConnectName)'
+          #     command: 'up'
+          #     args: '--yes --skip-preview'
+          #     cwd: './'
+          #     stack: '$(Build.SourceBranchName)'
+          #     createStack: true
 
   - stage: destroy_infrastructure
     jobs:
