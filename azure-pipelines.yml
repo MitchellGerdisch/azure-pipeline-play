@@ -6,31 +6,14 @@ stages:
     jobs:
       - job: build_infrastructure
         pool:
-          vmImage: 'ubuntu-16.04'
+          vmImage: 'ubuntu-latest'
         steps:
           - task: Npm@1
             inputs:
               command: install
               workingDir: './'
 
-          - task: AzureKeyVault@1
-            inputs:
-              azureSubscription: "Pulumi Subscription"
-              KeyVaultName: "mitch-deleteme"
-              SecretsFilter: "mitch-deleteme"
-              RunAsPreJob: false
 
-          - task: CmdLine@2
-            inputs:
-              script: echo Secret found $(mitch-deleteme)
-
-          - task: CmdLine@2
-            inputs:
-              script: pulumi config set-all --plaintext dbkey=$(mitch-deleteme)
-          
-          - task: CmdLine@2
-            inputs:
-              script: cat ./pulumi.dev.yaml
 
           # - task: Pulumi@1
           #   inputs:
