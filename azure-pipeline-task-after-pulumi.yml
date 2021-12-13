@@ -18,7 +18,7 @@ stages:
           
           - task: AzureKeyVault@1
             inputs:
-              azureSubscription: "MitchellGerdisch"
+              azureSubscription: "Azure Service Connection"
               KeyVaultName: "mitch-deleteme"
               SecretsFilter: "mitch-deleteme"
               RunAsPreJob: false
