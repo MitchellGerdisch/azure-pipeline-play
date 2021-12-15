@@ -6,7 +6,8 @@ stages:
     jobs:
       - job: build_infrastructure
         pool:
-          vmImage: 'ubuntu-latest'
+          # vmImage: 'ubuntu-latest'
+          vmImage: 'windows-latest'
         steps:
           - task: Npm@1
             inputs:
